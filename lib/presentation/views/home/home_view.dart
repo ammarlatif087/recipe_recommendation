@@ -996,7 +996,11 @@ class _HomeViewState extends State<HomeView> {
             Expanded(
               child: FirebaseAnimatedList(
                 shrinkWrap: true,
-                query: FirebaseDatabase.instance.ref().child('recipe_ratings'),
+                query: FirebaseDatabase.instance
+                    .ref()
+                    .child('recipe_ratings')
+                    .orderByChild('rating')
+                    .equalTo('5.0'),
                 itemBuilder: (BuildContext context, DataSnapshot snapshot,
                     Animation<double> animation, int index) {
                   Map student = snapshot.value as Map;
