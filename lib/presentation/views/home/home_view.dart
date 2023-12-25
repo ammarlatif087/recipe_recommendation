@@ -958,8 +958,7 @@ class _HomeViewState extends State<HomeView> {
                         decoration: BoxDecoration(
                           color: Colors.red,
                           borderRadius: BorderRadius.circular(10.r),
-                          shape: BoxShape
-                              .rectangle, // You can change the shape as needed
+                          shape: BoxShape.rectangle,
                         ),
                         child: IconButton(
                           visualDensity: VisualDensity.comfortable,

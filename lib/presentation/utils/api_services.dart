@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -52,5 +53,37 @@ class RecipeViewModel with ChangeNotifier {
     // TODO: implement dispose
     super.dispose();
     ingredientsController.dispose();
+  }
+
+  final DatabaseReference _databaseReference =
+      FirebaseDatabase.instance.ref().child('user_recipe_data');
+
+  List<String> selectedRecipes = [];
+  Map<String, int> recipeVisitCount = {};
+
+  void selectRecipe(String recipeName) {
+    // Increase visit count for the selected recipe
+    recipeVisitCount[recipeName] = (recipeVisitCount[recipeName] ?? 0) + 1;
+
+    if (!selectedRecipes.contains(recipeName)) {
+      selectedRecipes.add(recipeName);
+    }
+
+    // Save data to Firebase
+    _saveDataToFirebase();
+
+    notifyListeners();
+  }
+
+  void _saveDataToFirebase() {
+    _databaseReference.child('selectedRecipes').set(selectedRecipes);
+
+    // Save visit count for each recipe individually
+    recipeVisitCount.forEach((recipeName, visitCount) {
+      _databaseReference
+          .child('recipeVisitCount')
+          .child(recipeName)
+          .set(visitCount);
+    });
   }
 }

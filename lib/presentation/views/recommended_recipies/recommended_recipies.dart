@@ -36,12 +36,10 @@ class RecommendedRecipes extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         final recipe = viewModel.recipeModel!.response![index];
                         final imageUrl = recipe.imagePath;
-                        print(
-                            "Recipe list length: ${viewModel.recipeModel!.response!.length}");
-                        print("Index: $index");
 
                         return ListTile(
                           onTap: () {
+                            viewModel.selectRecipe(recipe.recipeName!);
                             Get.to(
                               RecommendedRecipesDetails(
                                 name: recipe.recipeName!,

@@ -73,8 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     )
                   : AppButton(
                       onPress: () {
-                        if (emailCtrl.text == 'admin@admin.com' &&
-                            passwordCtrl.text == 'admin123') {}
+                        // if (emailCtrl.text == 'admin@admin.com' &&
+                        //     passwordCtrl.text == 'admin123') {}
                         setState(() {
                           isLoading = true;
                         });
